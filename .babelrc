@@ -1,0 +1,16 @@
+{
+  "presets": ["es2015"],
+  "plugins": [
+    ["module-resolver", {
+      "root": ["./src"],
+      "alias": {
+        "constants": "./src/constants",
+        "config": "./src/config",
+        "controllers": "./src/controllers",
+        "lib": "./src/lib",
+        "routes": "./src/routes",
+      }
+    }],
+    "transform-object-rest-spread"
+  ]
+}

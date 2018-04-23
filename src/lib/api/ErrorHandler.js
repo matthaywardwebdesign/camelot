@@ -46,7 +46,6 @@ const errorHandler = ( err, req, res, next ) => {
   /* If the error code is less than 200 throw an internal server error */
   if ( code < 200 ) {
     res.status( 500 );
-    console.log(DEFAULT_ERROR_MESSAGE);
     res.json({ error: DEFAULT_ERROR_MESSAGE, hostname: os.hostname(), version: config.version });
     return;
   }
@@ -56,7 +55,7 @@ const errorHandler = ( err, req, res, next ) => {
    * as well as including hostname and version
    */
   res.status( code );
-  console.log( err );
+  console.log(err);
   res.json({ error: message, hostname: os.hostname(), version: config.version });
 };
 

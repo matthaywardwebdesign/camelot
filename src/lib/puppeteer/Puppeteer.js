@@ -27,7 +27,7 @@ class Puppeteer {
 
   async renderURLToPDF ( filename, pdfOptions={}, otherOptions={}){
     const combinedOptions = {
-      format: options.format || 'A4',
+      format: pdfOptions.format || 'A4',
     };
 
     /* Load the browser if it isn't already loaded */
@@ -39,7 +39,7 @@ class Puppeteer {
     const page = await this.browser.newPage();
 
     /* Navigate to the html */
-    await page.goto( otherOptions.externalURL, { waitUntil: 'networkidle2' });
+    await page.goto( otherOptions.urlToPDF, { waitUntil: 'networkidle2' });
     await page.pdf({ path: `tmp/${filename}.pdf`, ...pdfOptions });
 
   }

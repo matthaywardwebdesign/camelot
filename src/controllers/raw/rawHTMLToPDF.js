@@ -4,22 +4,21 @@ import uuid from 'uuid/v4';
 
 export default async ( req, res ) => {
   /* Get the html body */
-  const { html, sendFile, urlToPDF } = req.body;
+  const { html, sendFile, url } = req.body;
 
   /* Generate a unique filename */
   const filename = uuid();
 
   /* Write html to file if the user sends HTML data*/
-  if( html ){
+  if ( html ) {
     await fsWrite( `${__dirname}/../../../tmp/${filename}.html`, html );
   }
 
   /* Render to a PDF document */
-  if( html ){
+  if ( html ) {
     await Puppeteer.renderHTMLToPDF( filename );
-  }
-  else {
-    await Puppeteer.renderURLToPDF( filename, {}, {urlToPDF} );
+  } else {
+    await Puppeteer.renderURLToPDF( filename, {}, { url });
   }
   /* If `sendFile` was set to a truthy value then return the file straight away instead of the link */
   if ( sendFile ) {

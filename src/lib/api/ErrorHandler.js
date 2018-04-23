@@ -3,7 +3,9 @@ import os from 'os';
 import config from 'config';
 import { DEFAULT_ERROR_MESSAGE } from 'constants';
 import Logger from '../logging';
-Logger.warn( 'Dev Mode: ' + config.mode.environment + '\n' );
+if ( config.mode.environment === 'development' ) {
+  Logger.warn( 'Dev Mode: ' + config.mode.environment + '\n' );
+}
 const errorHandler = ( err, req, res, next ) => {
   /* If the headers have already been sent pass this up the chain */
   if ( res.headersSent ) {

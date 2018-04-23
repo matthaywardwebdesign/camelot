@@ -2,7 +2,8 @@
 import os from 'os';
 import config from 'config';
 import { DEFAULT_ERROR_MESSAGE } from 'constants';
-
+import Logger from '../logging';
+Logger.warn("Dev Mode: "+ config.mode.environment+ '\n' );
 const errorHandler = ( err, req, res, next ) => {
   /* If the headers have already been sent pass this up the chain */
   if ( res.headersSent ) {
@@ -55,7 +56,11 @@ const errorHandler = ( err, req, res, next ) => {
    * as well as including hostname and version
    */
   res.status( code );
-  console.log(err);
+  /* if the mode is development send the full error in the console  for debuggig purposes*/
+  if( config.mode.environment === 'development' ){
+    console.log( err);
+    return res.json({ error: err.toString(), hostname: os.hostname(), version: config.version });
+  }
   res.json({ error: message, hostname: os.hostname(), version: config.version });
 };
 

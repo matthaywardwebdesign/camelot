@@ -10,7 +10,7 @@ class Routes {
     /* Load all of the routes */
     API.registerRoute( 'get', '/', getApplicationInformation );
     API.registerRoute( 'post', '/raw', rawHTMLToPDF );
-    API.registerRoute( 'get', '/get-pdf', rawHTMLToPDF );
+    API.registerRoute( 'post', '/get-pdf', rawHTMLToPDF );
     /* Enable the error handler */
     API.enableErrorHandler();
   }

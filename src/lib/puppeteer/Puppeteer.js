@@ -24,6 +24,25 @@ class Puppeteer {
     await page.goto( `http://localhost:${config.api.port}/docs/${filename}.html`, { waitUntil: 'networkidle2' });
     await page.pdf({ path: `tmp/${filename}.pdf`, ...combinedOptions });
   }
+
+  async renderURLToPDF ( filename, pdfOptions={}, otherOptions={}){
+    const combinedOptions = {
+      format: options.format || 'A4',
+    };
+
+    /* Load the browser if it isn't already loaded */
+    if ( !this.browser ) {
+      await this.loadBrowser();
+    }
+
+    /* Create a new blank page */
+    const page = await this.browser.newPage();
+
+    /* Navigate to the html */
+    await page.goto( otherOptions.externalURL, { waitUntil: 'networkidle2' });
+    await page.pdf({ path: `tmp/${filename}.pdf`, ...pdfOptions });
+
+  }
 }
 
 export default new Puppeteer();

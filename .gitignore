@@ -57,3 +57,7 @@ typings/
 .env
 
 dist
+
+tmp/*.html
+tmp/*.pdf
+tmp/*.txt

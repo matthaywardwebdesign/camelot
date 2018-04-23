@@ -2,12 +2,14 @@
 import API from 'lib/api';
 import {
   getApplicationInformation,
+  rawHTMLToPDF
 } from 'controllers';
 
 class Routes {
   load() {
     /* Load all of the routes */
     API.registerRoute( 'get', '/', getApplicationInformation );
+    API.registerRoute( 'post', '/raw', rawHTMLToPDF );
 
     /* Enable the error handler */
     API.enableErrorHandler();

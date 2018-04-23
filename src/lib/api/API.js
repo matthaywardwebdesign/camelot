@@ -18,6 +18,9 @@ class API {
     /* Add cors support */
     this.app.use( cors());
 
+    /* Serve up the temp directory under docs route */
+    this.app.use( '/docs', express.static( 'tmp' ));
+
     /* Listen on the defined port */
     this.app.listen( config.api.port, () => {
       Logger.info( `${config.appName} is now listening on ${config.api.port}` );

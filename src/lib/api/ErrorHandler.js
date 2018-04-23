@@ -3,7 +3,7 @@ import os from 'os';
 import config from 'config';
 import { DEFAULT_ERROR_MESSAGE } from 'constants';
 import Logger from '../logging';
-Logger.warn("Dev Mode: "+ config.mode.environment+ '\n' );
+Logger.warn( 'Dev Mode: ' + config.mode.environment + '\n' );
 const errorHandler = ( err, req, res, next ) => {
   /* If the headers have already been sent pass this up the chain */
   if ( res.headersSent ) {
@@ -35,7 +35,7 @@ const errorHandler = ( err, req, res, next ) => {
   }
 
   /* If the error has a response body use the response body as the message */
-  if ( err.response ){
+  if ( err.response ) {
     message = err.response.data;
   }
 
@@ -47,7 +47,11 @@ const errorHandler = ( err, req, res, next ) => {
   /* If the error code is less than 200 throw an internal server error */
   if ( code < 200 ) {
     res.status( 500 );
-    res.json({ error: DEFAULT_ERROR_MESSAGE, hostname: os.hostname(), version: config.version });
+    res.json({
+      error: DEFAULT_ERROR_MESSAGE,
+      hostname: os.hostname(),
+      version: config.version
+    });
     return;
   }
 
@@ -57,11 +61,19 @@ const errorHandler = ( err, req, res, next ) => {
    */
   res.status( code );
   /* if the mode is development send the full error in the console  for debuggig purposes*/
-  if( config.mode.environment === 'development' ){
-    console.log( err);
-    return res.json({ error: err.toString(), hostname: os.hostname(), version: config.version });
+  if ( config.mode.environment === 'development' ) {
+    console.log( err );
+    return res.json({
+      error: err.toString(),
+      hostname: os.hostname(),
+      version: config.version
+    });
   }
-  res.json({ error: message, hostname: os.hostname(), version: config.version });
+  res.json({
+    error: message,
+    hostname: os.hostname(),
+    version: config.version
+  });
 };
 
 export default errorHandler;

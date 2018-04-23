@@ -1,0 +1,4 @@
+camelot:
+  build: .
+  ports:
+    - "7331:7331"

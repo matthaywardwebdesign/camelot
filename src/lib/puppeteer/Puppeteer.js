@@ -3,7 +3,7 @@ import config from 'config';
 
 class Puppeteer {
   async loadBrowser() {
-    this.browser = await puppeteer.launch();
+    this.browser = await puppeteer.launch({ args: ['--no-sandbox'] });
   }
 
   async renderHTMLToPDF( filename, options = {}) {

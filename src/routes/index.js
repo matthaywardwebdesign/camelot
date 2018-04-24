@@ -2,7 +2,7 @@
 import API from 'lib/api';
 import {
   getApplicationInformation,
-  rawHTMLToPDF
+  rawHTMLToPDF,
 } from 'controllers';
 
 class Routes {
@@ -10,7 +10,7 @@ class Routes {
     /* Load all of the routes */
     API.registerRoute( 'get', '/', getApplicationInformation );
     API.registerRoute( 'post', '/raw', rawHTMLToPDF );
-
+    API.registerRoute( 'post', '/get-pdf', rawHTMLToPDF );
     /* Enable the error handler */
     API.enableErrorHandler();
   }

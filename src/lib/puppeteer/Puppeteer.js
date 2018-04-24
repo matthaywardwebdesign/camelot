@@ -9,7 +9,7 @@ class Puppeteer {
   async renderHTMLToPDF( filename, options = {}) {
     /* Combine the passed in options with defaults */
     const combinedOptions = {
-      format: options.format || 'A4',
+      format: options.format || 'A4'
     };
 
     /* Load the browser if it isn't already loaded */
@@ -21,8 +21,33 @@ class Puppeteer {
     const page = await this.browser.newPage();
 
     /* Navigate to the html */
-    await page.goto( `http://localhost:${config.api.port}/docs/${filename}.html`, { waitUntil: 'networkidle2' });
+    await page.goto(
+      `http://localhost:${config.api.port}/docs/${filename}.html`,
+      { waitUntil: 'networkidle2' }
+    );
     await page.pdf({ path: `tmp/${filename}.pdf`, ...combinedOptions });
+  }
+
+  async renderURLToPDF( filename, pdfOptions = {}, otherOptions = {}) {
+    const combinedOptions = {
+      format: pdfOptions.format || 'A4'
+    };
+
+    /* Load the browser if it isn't already loaded */
+    if ( !this.browser ) {
+      await this.loadBrowser();
+    }
+
+    /* Create a new blank page */
+    const page = await this.browser.newPage();
+
+    /* Navigate to the html */
+    await page.goto( otherOptions.url, { waitUntil: 'networkidle2' });
+    await page.pdf({
+      path: `tmp/${filename}.pdf`,
+      ...combinedOptions,
+      ...pdfOptions
+    });
   }
 }
 

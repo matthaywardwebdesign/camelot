@@ -9,7 +9,8 @@ class Puppeteer {
   async renderHTMLToPDF( filename, options = {}) {
     /* Combine the passed in options with defaults */
     const combinedOptions = {
-      format: options.format || 'A4'
+      format: options.format || 'A4',
+      printBackground: true,
     };
 
     /* Load the browser if it isn't already loaded */
@@ -30,7 +31,8 @@ class Puppeteer {
 
   async renderURLToPDF( filename, pdfOptions = {}, otherOptions = {}) {
     const combinedOptions = {
-      format: pdfOptions.format || 'A4'
+      format: pdfOptions.format || 'A4',
+      printBackground: true,
     };
 
     /* Load the browser if it isn't already loaded */
